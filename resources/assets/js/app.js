@@ -14,6 +14,8 @@ require('./bootstrap');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+Vue.component('categories-list', require('./components/Categories/CategoriesList.vue'));
+Vue.component('envelopes-list', require('./components/Envelopes/EnvelopesList.vue'));
 
 const app = new Vue({
     el: '#app'

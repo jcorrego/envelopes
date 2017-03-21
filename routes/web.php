@@ -13,4 +13,6 @@
 
 Auth::routes();
 
+Route::resource('categories', 'CategoriesController');
+Route::resource('envelopes', 'EnvelopesController');
 Route::get('/', 'HomeController@index');
