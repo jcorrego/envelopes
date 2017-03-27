@@ -11,7 +11,7 @@ class Category extends Model
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'icon'];
 
     /**
      * Return envelopes records associated with this category

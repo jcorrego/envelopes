@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Envelopes\Category;
 use App\Envelopes\Envelope;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,9 @@ class EnvelopesController extends Controller
      */
     public function index()
     {
-        $envelopes = Envelope::all();
-        return view('envelopes.index', compact('envelopes'));
+        $envelopes = Envelope::orderBy('category_id')->get();
+        $categories = Category::orderBy('name')->get();
+        return view('envelopes.index', compact('envelopes','categories'));
 
     }
 
@@ -36,8 +38,16 @@ class EnvelopesController extends Controller
      */
     public function store()
     {
+        $this->validate(request(), [
+            'category_id' => 'required',
+            'name' => 'required|min:3',
+        ]);
         $results = [];
-        if($envelope = Envelope::create(request()->all()))$results['envelope'] = $envelope;
+        if($envelope = Envelope::create(request()->all())){
+            $envelope->load('category');
+            $envelope->icon = 'envelope-o';
+            $results['envelope'] = $envelope;
+        }
         return $results;
     }
 
@@ -60,29 +70,39 @@ class EnvelopesController extends Controller
      */
     public function edit(Envelope $envelope)
     {
-        //
+        $categories = Category::orderBy('name')->get();
+        return view('envelopes.edit',compact('envelope', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Envelopes\Envelope  $envelope
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Envelope $envelope)
+    public function update(Envelope $envelope)
     {
-        //
+        $results = [];
+        if($envelope->update(request()->all())){
+            $results['status'] = 'success';
+            $results['message'] = __('Sobre actualizado');
+        }
+        return $results;
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Envelopes\Envelope  $envelope
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function destroy(Envelope $envelope)
     {
-        //
+        $envelope->delete();
+        $results = [];
+        $results['status'] = 'success';
+        $results['category'] = $envelope;
+        $results['message'] = __('Sobre eliminado');
+        return $results;
     }
 }

@@ -15,4 +15,6 @@ Auth::routes();
 
 Route::resource('categories', 'CategoriesController');
 Route::resource('envelopes', 'EnvelopesController');
+Route::resource('budgets', 'BudgetsController');
+Route::post('budgets/{envelope}/{month}/setvalue', 'BudgetsController@setValue');
 Route::get('/', 'HomeController@index');

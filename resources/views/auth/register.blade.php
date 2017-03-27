@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title') {{ __('Registro') }} @parent @endsection
 @section('content')
 <div class="container">
     <div class="row">

@@ -19,7 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->timestamps();
         });
         Schema::table('envelopes', function (Blueprint $table) {
-            $table->integer('category_id')->unsigned()->nullable();
+            $table->integer('category_id')->unsigned()->nullable()->after('balance');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
         });
 

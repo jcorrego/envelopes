@@ -14,7 +14,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::withCount('envelopes')->orderBy('name')->get();
         return view('categories.index', compact('categories'));
     }
 
@@ -59,29 +59,39 @@ class CategoriesController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('categories.edit',compact('category'));
+
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Envelopes\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Category $category)
     {
-        //
+        $results = [];
+        if($category->update(request()->all())){
+            $results['status'] = 'success';
+            $results['message'] = __('Categoría actualizada');
+        }
+        return $results;
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Envelopes\Category  $category
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        $results = [];
+        $results['status'] = 'success';
+        $results['category'] = $category;
+        $results['message'] = __('Categoría eliminada');
+        return $results;
     }
 }

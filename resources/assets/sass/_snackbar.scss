@@ -1,0 +1,30 @@
+.snackbar {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px 20px;
+  background-color: #323232;
+  font-size: 14px;
+  border-radius: 2px;
+  height: 0;
+  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in, height 0s linear 0.2s, padding 0s linear 0.2s, height 0s linear 0.2s;
+  transform: translateY(200%);
+
+  &.danger {
+    background-color: $red-500;
+    color: $white;
+  }
+  &.success {
+    background-color: $green-500;
+    color: $white;
+  }
+  &.snackbar-opened {
+    // Style
+    padding: 14px 15px;
+    margin-bottom: 20px;
+
+    // Animation
+    height: auto;
+    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in, height 0s linear 0.2s, height 0s linear 0.2s;
+    transform: none;
+  }
+}

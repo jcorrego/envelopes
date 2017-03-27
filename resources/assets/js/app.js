@@ -13,9 +13,17 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+// Vue.component('example', require('./components/Example.vue'));
 Vue.component('categories-list', require('./components/Categories/CategoriesList.vue'));
+Vue.component('categories-edit', require('./components/Categories/CategoriesEdit.vue'));
 Vue.component('envelopes-list', require('./components/Envelopes/EnvelopesList.vue'));
+Vue.component('envelopes-edit', require('./components/Envelopes/EnvelopesEdit.vue'));
+Vue.component('budgets-list', require('./components/Budgets/BudgetsList.vue'));
+Vue.component('budgets-edit', require('./components/Budgets/BudgetsEdit.vue'));
+Vue.component('currency-input', require('./components/Inputs/CurrencyInput.vue'));
+
+import ElementUI from 'element-ui'
+Vue.use(ElementUI)
 
 const app = new Vue({
     el: '#app'
