@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 md-offset-2">
+        <div class="col-md-8 offset-md-2">
             <div class="card">
                 <div class="card-header">{{ __('Ingresar') }}</div>
                 <div class="card-block">
@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-6 md-offset-4">
+                            <div class="col-md-6 offset-md-4">
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Recordarme') }}
@@ -49,7 +49,7 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-8 md-offset-4">
+                            <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Ingresar') }}
                                 </button>
